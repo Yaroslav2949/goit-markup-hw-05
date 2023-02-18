@@ -22,7 +22,7 @@ body {
   --secondary-text-color: #757575;
   --background-footer-color: #2f303a;
   --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  --duration: transition-duration: 250ms;
+  --duration: transform 250ms;
 }
 
 ul {
@@ -771,8 +771,8 @@ ul {
   background: #f5f4fa;
   border: none;
   border-radius: 4px;
-
-  transition: box-shadow 250ms var(--timing-function);
+  transition: background-color var(--duration) var(--timing-function);
+  transition: box-shadow var(--duration) var(--timing-function);
 }
 .button:hover,
 .button:focus {
@@ -792,8 +792,7 @@ ul {
   border-radius: 4px;
   cursor: pointer;
   border: none;
-  transition: box-shadow 250ms var(--timing-function);
-  transition: background-color 250ms var(--timing-function);
+  transition: box-shadow var(--duration) var(--timing-function);
 }
 .buttons:hover,
 .buttons:focus {
@@ -803,7 +802,8 @@ ul {
   cursor: pointer;
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
     0px 2px 2px rgba(0, 0, 0, 0.12);
-  transition: background-color 250ms var(--timing-function);
+  transition: background-color var(--duration) var(--timing-function);
+  transition: box-shadow var(--duration) var(--timing-function);
 }
 
 /* лінки портфоліо */
@@ -834,7 +834,7 @@ ul {
 
 /* Альтернатива розміщення блоків Портфоліо*/
 
-.section-list-element {
+.section-list-element > .link {
   position: relative;
   width: 370px;
   margin-right: 30px;
@@ -848,11 +848,11 @@ ul {
   margin-bottom: 0px;
 }
 
-.section-list-element:hover {
+.section-list-element > .link:hover {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
     1px 4px 6px rgba(0, 0, 0, 0.16);
 }
-.section-list-element:focus {
+.section-list-element > .link:focus {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
     1px 4px 6px rgba(0, 0, 0, 0.16);
 }
@@ -870,6 +870,7 @@ ul {
   width: 100%;
   height: 100%;
   background-color: rgba(33, 150, 243, 0.9);
+  margin: 0px;
   padding: 63px 24px;
   color: #ffffff;
   font-size: 18px;
@@ -877,10 +878,16 @@ ul {
   line-height: 1.56;
   letter-spacing: 0.03em;
   transform: translateY(100%);
+  transition: var(--duration) var(--timing-function);
 }
-.section-list-element:hover .description-text {
-  transition: transforme 250ms var(--timing-function);
+.section-list-element > .link:hover .description-text {
+  transition: var(--duration) var(--timing-function);
 
   transform: translateY(0%);
 }
 
+.section-list-element > .link:focus .description-text {
+  transition: var(--duration) var(--timing-function);
+
+  transform: translateY(0%);
+}
