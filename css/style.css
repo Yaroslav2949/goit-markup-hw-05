@@ -21,6 +21,8 @@ body {
   --primary-text-color: #212121;
   --secondary-text-color: #757575;
   --background-footer-color: #2f303a;
+  --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration: transition-duration: 250ms;
 }
 
 ul {
@@ -47,7 +49,6 @@ ul {
 }
 .page-header {
   border-bottom: 1px solid #eeeeee;
-
 }
 .main-nav {
   display: flex;
@@ -103,9 +104,10 @@ ul {
   color: var(--primary-text-color);
   text-decoration: none;
   display: block;
-
+  position: relative;
   padding-top: 32px;
   padding-bottom: 32px;
+  transition: color 250ms var(--timing-function);
 }
 .nav-list .item:last-child {
   margin-right: 0px;
@@ -122,6 +124,18 @@ ul {
 }
 .nav-list-link:focus {
   color: var(--accent-color);
+}
+.nav-list-link.active-page::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: #2196f3;
+  border-radius: 2px;
+
+  display: block;
+  width: 100%;
+  height: 4px;
 }
 
 /* адреса в шапці (телефон + пошта*/
@@ -155,8 +169,10 @@ ul {
   margin-left: 50px;
 }
 
-.contact-list-link>.icon {
+.contact-list-link > .icon {
   margin-right: 10px;
+  fill: #afb1b8;
+  fill: currentColor;
 }
 
 /* MAIN */
@@ -222,6 +238,54 @@ ul {
   padding: 10px 32px;
 }
 
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  transition: opacity 250ms var(--timing-function);
+  z-index: 3;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.backdrop.is-hidden.modal {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 528px;
+  height: 581px;
+  background-color: #fff;
+  transform: translate(-50%, -50%) scale(1.1);
+  transition: transform 250ms var(--timing-function);
+}
+.close-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 0;
+  width: 30;
+  height: 30;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
 /* чим займаємося наші переваги */
 
 .preference {
@@ -288,9 +352,9 @@ ul {
   height: 120px;
   background: #f5f4fa;
   border-radius: 4px;
- display: flex;
- align-items: center;
- justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 30px;
 }
 
@@ -314,6 +378,37 @@ ul {
   width: 1230px;
 
   margin-bottom: 94px;
+}
+.lable {
+  width: 370px;
+  height: 70px;
+  background: rgba(47, 48, 58, 0.8);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  align-items: center;
+  z-index: index 1;
+}
+.discribe-element-icon {
+  position: relative;
+  z-index: -1;
+}
+
+.lable-title {
+  margin: 0;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+
+  color: #ffffff;
 }
 
 /* наша команда */
@@ -341,7 +436,7 @@ ul {
 .team-list {
   margin: 0px;
   padding: 0px;
- 
+
   display: flex;
 }
 /* Альтернативний варіант розбиття блоків Наша Команда */
@@ -371,8 +466,8 @@ ul {
 .team-members-discribe {
   padding-top: 30px;
   padding-bottom: 30px;
-  border: 2px solid;
-  background-color:  #FFFFFF;
+
+  background-color: #ffffff;
 }
 
 .team-members-text {
@@ -402,6 +497,7 @@ ul {
   border-radius: 50%;
   width: 44px;
   height: 44px;
+  transition: background-color 250ms var(--timing-function);
 }
 
 .links-item:hover,
@@ -410,7 +506,7 @@ ul {
 }
 
 .links-item {
-  background-color:  #FFFFFF;
+  background-color: #ffffff;
 }
 .links-item:hover .links-icon {
   fill: #fff;
@@ -454,17 +550,28 @@ ul {
   border: 1px solid #afb1b8;
   border-radius: 4px;
   display: flex;
+
+  transition: border 250ms var(--timing-function);
 }
 .clients-icon {
   display: flex;
   fill: #afb1b8;
-  
+  transition: fill 250ms var(--timing-function);
 }
 
 .clients-list-link:hover {
   border: 1px solid #2196f3;
 }
+
+.clients-list-link:focus {
+  border: 1px solid #2196f3;
+}
+
 .clients-list-link:hover .clients-icon {
+  fill: #2196f3;
+}
+
+.clients-list-link:focus .clients-icon {
   fill: #2196f3;
 }
 
@@ -506,6 +613,7 @@ ul {
   margin: 0;
   margin-bottom: 9px;
   color: #ffffff;
+  transition: color 250ms var(--timing-function);
 }
 .adress:hover {
   color: var(--accent-color);
@@ -569,6 +677,7 @@ ul {
 
 .footer-links-container {
   display: block;
+  margin-left: 70px;
 }
 
 .container-footer {
@@ -578,17 +687,19 @@ ul {
   padding-right: 15px;
   width: 1200px;
   display: flex;
-  gap: 70px;
+
   align-items: baseline;
 }
 
 .links-item-footer {
   display: flex;
   align-items: center;
+  justify-content: center;
   border-radius: 50%;
   width: 44px;
   height: 44px;
   background: rgba(255, 255, 255, 0.1);
+  transition: background-color 250ms var(--timing-function);
 }
 
 .links-item-footer:hover,
@@ -660,6 +771,8 @@ ul {
   background: #f5f4fa;
   border: none;
   border-radius: 4px;
+
+  transition: box-shadow 250ms var(--timing-function);
 }
 .button:hover,
 .button:focus {
@@ -679,15 +792,18 @@ ul {
   border-radius: 4px;
   cursor: pointer;
   border: none;
+  transition: box-shadow 250ms var(--timing-function);
+  transition: background-color 250ms var(--timing-function);
 }
 .buttons:hover,
 .buttons:focus {
-  background: #2196f3;
+  background-color: #2196f3;
 
   color: #ffffff;
   cursor: pointer;
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
     0px 2px 2px rgba(0, 0, 0, 0.12);
+  transition: background-color 250ms var(--timing-function);
 }
 
 /* лінки портфоліо */
@@ -719,9 +835,11 @@ ul {
 /* Альтернатива розміщення блоків Портфоліо*/
 
 .section-list-element {
+  position: relative;
   width: 370px;
   margin-right: 30px;
   margin-bottom: 30px;
+  transition: box-shadow 250ms var(--timing-function);
 }
 .section-list-element:nth-child(3n) {
   margin-right: 0px;
@@ -738,3 +856,31 @@ ul {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
     1px 4px 6px rgba(0, 0, 0, 0.16);
 }
+
+.hover-overlay {
+  position: relative;
+
+  overflow: hidden;
+}
+
+.description-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(33, 150, 243, 0.9);
+  padding: 63px 24px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.56;
+  letter-spacing: 0.03em;
+  transform: translateY(100%);
+}
+.section-list-element:hover .description-text {
+  transition: transforme 250ms var(--timing-function);
+
+  transform: translateY(0%);
+}
+

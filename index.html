@@ -68,7 +68,21 @@
         <div class="container">
           <h1 class="hero-text">Ефективні рішення для вашого бізнесу</h1>
 
-          <button class="hero-button" type="button">Замовити послугу</button>
+          <button class="hero-button" data-modal-open type="button">
+            Замовити послугу
+          </button>
+        </div>
+        <div class="backdrop is-hidden" data-modal>
+          <div class="modal">
+            <p></p>
+           
+            <button class="close-icon" type="button" data-modal-close>
+              <svg  width="18px" height="18px">  
+                <use href="./images/icons.svg/sprite1.svg#close-icon"></use>
+              </svg>
+             </button>
+            
+          </div>
         </div>
       </section>
 
@@ -131,28 +145,43 @@
           <h2 class="discribe-item">Чим ми займаємося</h2>
           <ul class="discribe-list">
             <li class="discribe-element">
+              <div class="discribe-element-icon">
               <img
                 class="img-item"
                 src="images/img1.jpg"
                 width="370"
                 alt="Робочий процес з гаджетами"
               />
+              <div class="lable">
+                <h3 class="lable-title" >Десктопні додатки</h3>
+              </div>
+            </div>
             </li>
             <li class="discribe-element">
+              <div class="discribe-element-icon">
               <img
                 class="img-item"
                 src="images/img2.jpg"
                 width="370"
                 alt="Робочий процес з гаджетами"
               />
+               <div class="lable">
+                <h3 class="lable-title" >Мобільні додатки</h3>
+              </div>
+              </div>
             </li>
             <li class="discribe-element">
+              <div class="discribe-element-icon">
               <img
                 class="img-item"
                 src="images/img3.jpg"
                 width="370"
                 alt="Робочий процес з гаджетами"
               />
+              <div class="lable">
+                <h3 class="lable-title" >Дизайнерські рішення</h3>
+              </div>
+              </div>
             </li>
           </ul>
         </div>
@@ -474,5 +503,6 @@
         </div>
       </div>
     </footer>
+    <script src="./js/modal.js"></script>
   </body>
 </html>
